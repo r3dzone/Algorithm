@@ -21,7 +21,7 @@ int main(){
 	
 	sort(vec.begin(),vec.end());
 	
-	vec.resize(vec.size() - (vec.end() - unique(vec.begin(),vec.end())));
+	vec.resize(unique(vec.begin(),vec.end()) - vec.begin());
 	
 	for(int i = 0; i < vec.size();i++){
 		cout << vec[i]  << "\n";
