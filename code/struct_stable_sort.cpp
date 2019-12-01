@@ -12,8 +12,6 @@ struct point{
 bool cmp(const point &p1 ,const point &p2){
 	if(p1.y < p2.y){
 		return true;
-	}else if(p1.y == p2.y){
-		return p1.x > p2.x;
 	}else return false;
 }
 
@@ -34,7 +32,7 @@ int main(){
 	cout << "\ty:\tx:\n";
 	for(int i = 0; i < 5; i++ ) cout << "\t" << p[i].y << "\t" << p[i].x << "\n"; 
 	
-	sort(p,p+5,cmp);
+	stable_sort(p,p+5,cmp);
 	
 	cout << "\n\ty:\tx:\n";
 	for(int i = 0; i < 5; i++ ) cout << "\t" << p[i].y << "\t" << p[i].x << "\n"; 
