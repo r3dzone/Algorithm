@@ -7,7 +7,7 @@ using namespace std;
 const int selnum = 6;
 const int MAXN = 13;
 vector<int> vec;
-int arr[MAXN+5];
+int arr[MAXN+1000];
 int cnt;
 
 void vec_print(vector<int> vec){
@@ -18,8 +18,8 @@ void vec_print(vector<int> vec){
 }
 
 void lotto(int i,int j){
-	if(j == 0) vec_print(vec);
-	if(j == cnt) return;
+	if(j == 0)return vec_print(vec);
+	if(i == cnt) return;
 	
 	vec.push_back(arr[i]);
 	lotto(i+1,j-1);
@@ -34,7 +34,7 @@ int main(){
 		for(int i = 0; i < cnt ;i ++){
 			cin >> arr[i];
 		}
-		lotto(0,selnum);
+		lotto(0,6);
 		cout << "\n";
 	} 
 	return 0;
