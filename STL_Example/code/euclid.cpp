@@ -5,16 +5,8 @@
 using namespace std;
 
 int euclid(int num1, int num2){
-	int mintmp = min(num1,num2);
-	int num1rem = num1 % mintmp;
-	int num2rem = num2 % mintmp;
-	
-	if( num1rem == 0 && num2rem == 0) return mintmp;//finish!
-	
-	if(num1rem == 0){
-		euclid(num1,num2rem);
-	}else euclid(num2,num1rem);
-	
+	if(num1%num2 == 0) return num2;
+	else return euclid(num2,num1%num2);
 }
 
 int main(){
