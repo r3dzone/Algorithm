@@ -6,13 +6,12 @@ using namespace std;
 
 long long int x = 0;
 long long int y = 0;
-int rot = 0;
+int dX[4] = {1,0,-1,0};
+int dY[4] = {0,-1,0,1};
 
 int move(int rot, long long int dst){
-	if(rot == 0){x += dst;}
-	if(rot == 1){y -= dst;}
-	if(rot == 2){x -= dst;}
-	if(rot == 3){y += dst;}
+	x += dX[rot] * dst;
+	y += dY[rot] * dst;
 }
 
 int main(){
@@ -20,6 +19,7 @@ int main(){
 	long long int tmpdst;
 	string tmpstr;
 	int flag = 0;
+	int rot = 0;
 	
 	scanf("%d %d" ,&m ,&n );
 	for(int i = 0; i < n; i++){
