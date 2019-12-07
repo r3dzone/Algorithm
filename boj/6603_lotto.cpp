@@ -5,46 +5,37 @@
 using namespace std;
 
 const int selnum = 6;
-vector<int> sel;
+const int MAXN = 13;
 vector<int> vec;
-int aaa;
+int arr[MAXN+5];
+int cnt;
 
 void vec_print(vector<int> vec){
-	//cout << "호출됨\n";
 	for(int i = 0;i < vec.size();i++){
 		cout << vec[i] << " ";
 	}
 	cout << "\n";
 }
 
-void lotto(int iter,int cnt){
-	cout << iter << "===========\n";
-	for(int i = iter ; i < cnt; i++){
-		if(vec.size() < i)break;
-		sel.push_back(vec[i]);
-		if(sel.size() == selnum){ 
-			vec_print(sel);
-			sel.resize(iter);
-			cin >> aaa;
-		}else{
-			lotto(iter+1,cnt);
-		}
-	}
+void lotto(int i,int j){
+	if(j == 0) vec_print(vec);
+	if(j == cnt) return;
+	
+	vec.push_back(arr[i]);
+	lotto(i+1,j-1);
+	vec.pop_back();
+	lotto(i+1,j);
 }
 
 int main(){
-	int cnt = 1;
-	int tmpint;
 	while(1){
 		cin >> cnt;
 		if(cnt == 0) break;
 		for(int i = 0; i < cnt ;i ++){
-			cin >> tmpint;
-			vec.push_back(tmpint);
+			cin >> arr[i];
 		}
-		lotto(0,cnt);
+		lotto(0,selnum);
 		cout << "\n";
-		vec.clear();
 	} 
 	return 0;
 }
