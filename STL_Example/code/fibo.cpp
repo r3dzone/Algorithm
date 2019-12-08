@@ -15,5 +15,5 @@ int main(){
 	int cnt = 0;
 	cin >> cnt;
 	//cout << fibo(cnt - 1) << "\n"; // print FibonacciNum
-	for(int i = 0; i < cnt ; i++ ) cout << fibo(i) << "\n"; // print Fibonacci Sequence
+	for(int i = 0; i <= cnt ; i++ ) cout << fibo(i) << "\n"; // print Fibonacci Sequence
 }
