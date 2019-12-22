@@ -12,12 +12,10 @@ int n;
 int memo[MAXN+5][10];
 
 int dp(int x,int y){
-	if(x == 0 && y == 0) return 0;
+	if(y < 0 || y > 9 || (x == 0 && y == 0)) return 0;
 	if(x == 0) return 1;
     int& ret = memo[x][y];
 	if(ret != -1) return ret;
-    if(y == 0) return ret = dp(x-1,y+1);
-	if(y == 9) return ret = dp(x-1,y-1);
 	return ret = (dp(x-1,y-1) + dp(x-1,y+1)) % MOD; 
 }
 

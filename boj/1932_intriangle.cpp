@@ -11,13 +11,12 @@ int arr[MAXN+5][MAXN+5];
 long long memo[MAXN+5][MAXN+5];
 	
 long long dp(int x, int i){
+	if(i < 0) return 0;
 	if(x == 0) return arr[x][i];
-	if(i == 0) return arr[x][i] + dp(x-1,i);
-	if(x == i) return arr[x][i] + dp(x-1,i-1);
 	long long& ret = memo[x][i]; 
 	if (memo[x][i] != -1) return ret;
-	return ret = max(dp(x-1,i-1),dp(x-1,i)) + arr[x][i];
 	
+	return ret = max(dp(x-1,i-1),dp(x-1,i)) + arr[x][i];
 }
 
 int main(){

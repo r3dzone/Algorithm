@@ -11,10 +11,12 @@ int arr[MAXN+5];
 int n;
 
 long long dp(int x){
+	
+	if(x > n) return 0;
+	if(x == n) return arr[x];
 	long long& ret = memo[x];
-	if(x > n) return ret = 0;
-	if(x == n) return ret = arr[x];
 	if (ret != -1) return ret;
+	
 	return ret = max(arr[x+1] + dp(x+3), max(arr[x+1] + dp(x+4), dp(x+2) ) ) + arr[x];	
 }
 
