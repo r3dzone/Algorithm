@@ -13,9 +13,9 @@ const int INF = 1234567890;
 int n,m,x;
 
 int min_dist[MAXN+5][2]; //[0]:stt에서 n까지의 최소거리, [1]: n에서 stt까지의 최소거리; 
-vector<pair<int,int> > graph[MAXN];
+vector<pair<int,int> > graph[2][MAXN+5];
 
-int dijkstra(int src, int dst){
+void dijkstra(int src, int rev){ //rev:0 정방향 ,1 역방향 
 	vector<int> dist(n+5,INF);
 	priority_queue<pair<int,int> > pq; //cost,dst;
 	
@@ -25,34 +25,29 @@ int dijkstra(int src, int dst){
 		int cost = pq.top().first;
 		int here = pq.top().second;
 		pq.pop();
-		for(int i = 0; i < graph[here].size(); i++){
-			int next = graph[here][i].first;
-			int ndist = graph[here][i].second + cost;
+		for(int i = 0; i < graph[rev][here].size(); i++){
+			int next = graph[rev][here][i].first;
+			int ndist = graph[rev][here][i].second + cost;
 			if(dist[next] > ndist){
 				dist[next] = ndist;
 				pq.push(make_pair(ndist,next));
 			}
 		}
 	}
-	if(src == x)
-		for(int i = 1; i <= n; i++)
-			min_dist[i][0] = dist[i];
-	return dist[dst];
+	for(int i = 1; i <= n; i++)
+		min_dist[i][rev] = dist[i];
 }
 
-int main(){
-
-//문제해법은 시작지점을 X로 하는 dijkstra로 구한 최단거리로 집가는 거리를 알수 있고
-//각각 집에서 X로 가는 최소거리를 더해준 값의 최대값을 반환하면 된다.
-//근데 시간복잡도상 되나? 
+int main(){ 
 	int inp1,inp2,inp3;
 	scanf("%d %d %d",&n,&m,&x);
 	for(int i = 0; i < m; i++){
 		scanf("%d %d %d",&inp1,&inp2,&inp3);
-		graph[inp1].push_back(make_pair(inp2,inp3));
+		graph[0][inp1].push_back(make_pair(inp2,inp3));
+		graph[1][inp2].push_back(make_pair(inp1,inp3));
 	}
-	for(int i = 1; i <= n; i++)
-		min_dist[i][1] = dijkstra(i,x);
+	dijkstra(x,0);
+	dijkstra(x,1);
 	int ans = 0;
 	for(int i = 1; i <= n; i++)
 		ans = max(min_dist[i][0]+min_dist[i][1],ans);
